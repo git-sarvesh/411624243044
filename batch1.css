@@ -1,0 +1,56 @@
+body{
+    color: red;
+    background-color: yellow;
+    font-style:italic;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+p{
+    color: blue;
+    font-style: italic;
+}
+
+img{
+    height: 500px;
+    width: 500px;
+    border-radius: 100px;
+}
+
+video{
+    height: 500px;
+    /*width: 500px;
+    /*border-radius: 100px;*/
+}
+
+ol{
+    list-style-type: upper-roman;
+}
+
+ul{
+    list-style-type: disc;
+}
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
+}
+#p1{
+    font-size: 20px;
+    font-style: italic;
+}#p2{
+    font-size: 30px;
+    font-style: italic;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 33% 33% 34%;
+}
