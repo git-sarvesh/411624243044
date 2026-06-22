@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Fetch App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: navy;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        #status {
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .user {
+            border: 1px solid gray;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Users</h1>
+    <button id="btn">Click to Fetch Users</button>
+    <div id="status"></div>
+    <div id="users"></div>
+    <script>
+        let btn = document.getElementById("btn");
+        let statusDiv = document.getElementById("status");
+        let usersDiv = document.getElementById("users");
+        btn.addEventListener("click", function() {
+            usersDiv.innerHTML = "";            
+            statusDiv.innerHTML = "Loading...";
+            statusDiv.style.color = "orange";
+            setTimeout(function() {
+                fetch("https://jsonplaceholder.typicode.com/users")
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    statusDiv.innerHTML = "Loaded successfully";
+                    statusDiv.style.color = "green";
+                    for(let i = 0; i < data.length; i++) {
+                        let user = data[i];
+                        let div = document.createElement("div");
+                        div.className = "user";
+                        div.innerHTML = `
+                            <b>Name:</b> ${user.name} <br>
+                            <b>Email:</b> ${user.email} <br>
+                            <b>Phone:</b> ${user.phone}
+                        `;
+                        usersDiv.appendChild(div);
+                    }
+                })
+                .catch(function(error) {
+                    statusDiv.innerHTML = "Error occurred!";
+                    statusDiv.style.color = "red";
+                    console.log(error);
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
