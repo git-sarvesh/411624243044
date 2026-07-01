@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message App</title>
+</head>
+<body>
+
+<h2>Message Box</h2>
+
+<input id="msg" type="text" placeholder="Enter message">
+
+<button onclick="addMessage()">Add Message</button>
+<button onclick="clearMessages()">Clear All Messages</button>
+
+<p id="count">Characters: 0</p>
+
+<section id="display"></section>
+
+<p id="status"></p>
+
+
+<script>
+
+let messages = [];
+
+let input = document.getElementById("msg");
+let display = document.getElementById("display");
+let status = document.getElementById("status");
+
+
+// Character counter
+input.addEventListener("input", () => {
+    document.getElementById("count").textContent =
+        "Characters: " + input.value.length;
+});
+
+
+// Add message
+function addMessage() {
+
+    let promise = new Promise((resolve, reject) => {
+
+        if (input.value.length >= 3)
+            resolve(input.value);
+        else
+            reject();
+
+    });
+
+
+    promise.then(msg => {
+
+        messages.push(msg);
+
+        status.textContent = "Message Added Successfully";
+
+        input.value = "";   // clear input box
+        document.getElementById("count").textContent = "Characters: 0";
+
+        showMessages();
+
+
+        setTimeout(() => {
+
+            messages.shift();
+
+            showMessages();
+
+            status.textContent = "Message Expired";
+
+        }, 5000);
+
+
+    }).catch(() => {
+
+        status.textContent =
+        "Message must contain at least 3 characters";
+
+    });
+
+}
+
+
+
+// Display messages
+function showMessages() {
+
+    display.innerHTML = "";
+
+    messages.forEach(message => {
+
+        let p = document.createElement("p");
+
+        p.textContent = message;
+
+        display.appendChild(p);
+
+    });
+
+}
+
+
+
+// Clear all messages
+function clearMessages() {
+
+    messages = [];
+
+    display.innerHTML = "";
+
+    status.textContent = "All Messages Cleared";
+
+}
+
+</script>
+
+</body>
+</html>
