@@ -1,11 +1,12 @@
 import './App.css';
-import BGcolourChanger from './BGcolourChanger';
-
+//import BGcolourChanger from './BGcolourChanger';
+import Counter from './counter';
 
 function App() {
   return (
     <div className="App">
-      <BGcolourChanger />
+      {/* <BGcolourChanger /> */}
+      <Counter />
     </div>
   );
 }

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
+  useEffect(() => {console.log(count)}, [count])
 
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
